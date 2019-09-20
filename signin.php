@@ -17,15 +17,6 @@
            {  
                 $current_data = file_get_contents('users.json');  
                 $array_datas = json_decode($current_data);  
-               //  echo $array_data[0]->username;
-               //  $extra = array(  
-               //       'username' =>  $_POST["username"],  
-               //       'password' =>  $_POST["password"]
-               //  );  
-               //  $array_data[] = $extra;
-               //  $username_data['username'] = $user_extra;
-               //  $password_data['password'] = $password_extra;  
-               //  $final_data = json_encode($array_data);  
                     foreach($array_datas as $array_data)
                     {
                     if($array_data->username == $_POST["username"])
@@ -50,7 +41,7 @@
  <!DOCTYPE html>  
  <html>  
       <head>  
-           <title>Baygon - Signup</title>  
+           <title>Baygon - Signin</title>  
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  

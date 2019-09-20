@@ -62,7 +62,7 @@
                      <input type="text" name="username" class="form-control" /><br />  
                      <label>Password</label>  
                      <input type="text" name="password" class="form-control" /><br /> 
-                     <input type="submit" name="submit" value="Append" class="btn btn-info" /><br />                      
+                     <input type="submit" name="submit" value="Sign In" class="btn btn-info" /><br />                      
                      <?php  
                      if(isset($message))  
                      {  

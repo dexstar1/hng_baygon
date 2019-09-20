@@ -49,7 +49,7 @@
       <body>  
            <br />  
            <div class="container" style="width:500px;">  
-                <h3 align="">Sign Up</h3><br />                 
+                <h3 align="">Sign In</h3><br />                 
                 <form method="post">  
                      <?php   
                      if(isset($error))  

@@ -1,54 +1,62 @@
 <?php  
- $message = '';  
- $error = '';  
+
+if(isset($_SESSION['username']))
+{
+ header("location:../welcome_page/welcome_page.php");
+}
+else{
+
+        $message = '';  
+        $error = '';  
 
 
 
- if(isset($_POST["submit"]))  
- {  
-      if(empty($_POST["full_name"]))  
-      {  
-           $error = "<label class='text-danger'>Kindly provide a full name</label>";  
-      }  
-      else if(empty($_POST["username"]))  
-      {  
-           $error = "<label class='text-danger'> Kindly provide a username </label>";  
-      }  
-      else if(empty($_POST["password"]))  
-      {  
-           $error = "<label class='text-danger'>Please provide a password</label>";  
-      }  
-      else if(empty($_POST["confirm_password"]))  
-      {  
-           $error = "<label class='text-danger'>Please confirm your password</label>";  
-      }  
-      else  
-      {  
-           if(file_exists('../users.json'))  
-           {  
-                $current_data = file_get_contents('../users.json');  
-                $array_data = json_decode($current_data, true);  
-                $extra = array(  
-                     'full_name' => $_POST['full_name'],  
-                     'username' =>  $_POST["username"],  
-                     'password' =>  $_POST["password"]
-                );  
-                $array_data[] = $extra;  
-                $final_data = json_encode($array_data);  
-                if(file_put_contents('../users.json', $final_data))  
+        if(isset($_POST["submit"]))  
+        {  
+            if(empty($_POST["full_name"]))  
+            {  
+                $error = "<label class='text-danger'>Kindly provide a full name</label>";  
+            }  
+            else if(empty($_POST["username"]))  
+            {  
+                $error = "<label class='text-danger'> Kindly provide a username </label>";  
+            }  
+            else if(empty($_POST["password"]))  
+            {  
+                $error = "<label class='text-danger'>Please provide a password</label>";  
+            }  
+            else if(empty($_POST["confirm_password"]))  
+            {  
+                $error = "<label class='text-danger'>Please confirm your password</label>";  
+            }  
+            else  
+            {  
+                if(file_exists('../users.json'))  
                 {  
-                     $message = "Registration succesful";
-                     echo "<script type='text/javascript'>alert('$message');</script>";
-                     echo "<script type='text/javascript'>window.location.href='../sign_in/final_sign_in.php';</script>"; 
-                     
+                        $current_data = file_get_contents('../users.json');  
+                        $array_data = json_decode($current_data, true);  
+                        $extra = array(  
+                            'full_name' => $_POST['full_name'],  
+                            'username' =>  $_POST["username"],  
+                            'password' =>  $_POST["password"]
+                        );  
+                        $array_data[] = $extra;  
+                        $final_data = json_encode($array_data);  
+                        if(file_put_contents('../users.json', $final_data))  
+                        {  
+                            $message = "Registration succesful";
+                            echo "<script type='text/javascript'>alert('$message');</script>";
+                            echo "<script type='text/javascript'>window.location.href='../sign_in/final_sign_in.php';</script>"; 
+                            
+                        }  
                 }  
-           }  
-           else  
-           {  
-                $error = 'Error saving file';  
-           }  
-      }  
- }  
+                else  
+                {  
+                        $error = 'Error saving file';  
+                }  
+            }  
+        }  
+    }
  ?>  
 <!doctype html>
 <html>
@@ -123,12 +131,22 @@
         .account{
             margin-left:150px;
         }
+        .sign-up-link, .sign-up-btn, .sign-in-link{
+            border-radius: 20px;
+            border: 1px solid black;
+            color: black !important;
+            width: auto !important;
+            padding: 10px 20px 7px !important;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
     <div id="overlay">
         <div id="text">
-            <p class="account">Already have an account? &nbsp; &nbsp; <button class="sign_in" href ="../sign_in/sign_in.php"> SIGN IN</button></p>
+            <p class="account">Already have an account? &nbsp; &nbsp; <a class="sign-in-link" href ="../sign_in/final_sign_in.php" class="btn"> SIGN IN</a></p>
             <h2> BAYGON </h2>
             <p> Create your account by filling </p>
             <p> the form below </p>
@@ -150,7 +168,7 @@
                 <input type="password" name="password"><br><br>
                 Confirm Password: <br>
                 <input type="password" name="confirm_password"><br><br>
-                <input type="submit" name="submit" value="SIGN UP" class="btn btn-info" /><br />   
+                <input type="submit" name="submit" value="SIGN UP" class="btn btn-info submit-btn" /><br />   
                 <br /> 
                 <p style="color:green;">                     
                      <?php
